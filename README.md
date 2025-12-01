@@ -1,8 +1,5 @@
 # TheGreatFlapping
-Bashar Makani
-Laura Wetherhold 
-Alejandro Alvarez 
-Carlyne Ada 
+Group Members: Bashar Makani, Laura Wetherhold, Alejandro Alvarez, Carlyne Ada 
 
 You control a duck that’s being followed by a farmer. If the farmer gets you, you lose. You solve puzzles and platform to get items such as hay, pig feed, and so on
 The more items you get, the more animals you can lead out of the farm
