@@ -1,4 +1,0 @@
-repository "The Great Flapping 2025-11-30_22-30-39/The Great Flapping@20067514225415@cloud"
-  path "/"
-    br "/main"
-    co "/main"

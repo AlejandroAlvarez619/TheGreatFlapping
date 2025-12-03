@@ -43,17 +43,20 @@ public class NewBehaviourScript : MonoBehaviour
         if (playerInAttackRange && playerInSightRange) Attack();
     }
 
-    private void Patrol()
+private void Patrol()
+{
+    if (!walkPointSet) SearchForWalkPoint();
+
+    if (walkPointSet)
     {
-        if (!walkPointSet) SearchForWalkPoint();
-
-        if (walkPointSet) agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        // Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+        Debug.Log("Moving to walkPoint: " + walkPoint);
+        agent.SetDestination(walkPoint);
     }
+
+    Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+    if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+}
 
     private void Chase()
     {
