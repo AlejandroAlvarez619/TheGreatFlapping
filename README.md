@@ -5,8 +5,12 @@ You control a duck that is attempting to escape the shackles of being caged with
 
 <ins>Group Member Responsibilities:</ins>
   Bashar Makani - Implementing/animating movement logic
+  
   Carlyne Ada - Set up the environment for the model to roam around. The environment has to seamlessly blend in farm life with the goal of platforming to escape from a farmer, whilst still being visible and noticeable by players.
+  
   Alejandro Alvarez - Create an exciting gameplay loop that keeps the player engaged. This means simulated difficulty with enemy movement behavior and well-placed obstacles.
+  
   Laura Wetherhold - 3D animation and 3D painting of characters in a cute, semi-realistic style
+  
 
 Halfway Presentation Video Link: [Video]()
