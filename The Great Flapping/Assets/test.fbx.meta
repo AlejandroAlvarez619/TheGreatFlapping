@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: 8aa71194deb3e0a479cddf65aa8655a3
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: test(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cube
+      parentName: test(Clone)
+      position: {x: -2.298048, y: 0.04379854, z: 0.57538736}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 9.191209, y: 9.191209, z: 9.191209}
+    - name: Cube.001
+      parentName: test(Clone)
+      position: {x: 1.9484031, y: 0.2617382, z: -0.24656248}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 56.171154, y: 56.171154, z: 56.171154}
+    - name: Cube.002
+      parentName: test(Clone)
+      position: {x: 1.9672623, y: 0.15948907, z: -1.0362014}
+      rotation: {x: -0.50464296, y: 0.4953135, z: 0.49531275, w: 0.50464374}
+      scale: {x: 78.97508, y: 38.651543, z: 38.651543}
+    - name: Cube.003
+      parentName: test(Clone)
+      position: {x: -1.2651882, y: 0.3501419, z: -2.7581944}
+      rotation: {x: -0.70710677, y: 0, z: -0, w: 0.7071068}
+      scale: {x: -36.765182, y: -36.765182, z: -36.765182}
+    - name: Cube.004
+      parentName: test(Clone)
+      position: {x: -1.8919826, y: 0.16628017, z: -2.9907074}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 22.059202, y: 22.059202, z: 22.059202}
+    - name: Cube.005
+      parentName: test(Clone)
+      position: {x: -2.6569066, y: 0.4258971, z: -2.7571929}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 51.665062, y: 51.665062, z: 51.665062}
+    - name: Cube.006
+      parentName: test(Clone)
+      position: {x: -0.9103575, y: 0.08129257, z: -2.0283308}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: -0.7377742, y: -39.024323, z: -12.99981}
+    - name: Cylinder
+      parentName: test(Clone)
+      position: {x: 1.3296624, y: 0.5306934, z: 2.6456194}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 21.51042, y: 21.51042, z: 57.26086}
+    - name: Cylinder.001
+      parentName: test(Clone)
+      position: {x: 1.3296624, y: 0.5306934, z: 2.6456194}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 21.51042, y: 21.51042, z: 57.26086}
+    - name: Cylinder.002
+      parentName: test(Clone)
+      position: {x: 1.7041883, y: 0.25390768, z: 2.0921845}
+      rotation: {x: 0.000000030908623, y: 0.7071068, z: 0.7071067, w: 0.000000030908616}
+      scale: {x: -16.173906, y: -16.173906, z: -80.41425}
+    - name: Cylinder.003
+      parentName: test(Clone)
+      position: {x: 1.1777995, y: 0.29558498, z: 2.047151}
+      rotation: {x: 0.000000030908623, y: 0.7071068, z: 0.7071067, w: 0.000000030908616}
+      scale: {x: 19.899506, y: 19.899506, z: 54.473896}
+    - name: Cylinder.004
+      parentName: test(Clone)
+      position: {x: 1.6982509, y: 0.16109875, z: 1.640667}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 15.67146, y: 15.67146, z: 42.810734}
+    - name: Cylinder.005
+      parentName: test(Clone)
+      position: {x: 1.2654008, y: -0.08287833, z: 1.533886}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: -18.593061, y: -18.593061, z: -46.678753}
+    - name: Icosphere
+      parentName: test(Clone)
+      position: {x: 0.4417613, y: 0.08349839, z: -2.3193448}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 25.283009, y: 25.283009, z: 25.283009}
+    - name: Icosphere.001
+      parentName: test(Clone)
+      position: {x: 0.17593086, y: 0.12350881, z: -2.0915391}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 17.731874, y: 17.731874, z: 17.731874}
+    - name: Icosphere.002
+      parentName: test(Clone)
+      position: {x: -0.27938855, y: 0.05520229, z: 2.8110843}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 16.370333, y: 16.370333, z: 16.370333}
+    - name: Icosphere.003
+      parentName: test(Clone)
+      position: {x: -0, y: 0.101427466, z: 2.708833}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: -20.875502, y: -20.875502, z: -20.875502}
+    - name: Plane
+      parentName: test(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
