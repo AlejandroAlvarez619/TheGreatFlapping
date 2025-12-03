@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 2232539406690575206, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
+      propertyPath: m_Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3695888148082813881, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1043,11 +1047,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2737b7bdbbbec3943a52c004b07b127e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orientation: {fileID: 1752546961}
-  player: {fileID: 1524379544}
-  playerObj: {fileID: 1381678465}
-  rb: {fileID: 1524379545}
-  rotationSpeed: 7
+  orientation: {fileID: 0}
+  player: {fileID: 0}
+  playerObj: {fileID: 0}
+  rb: {fileID: 0}
+  rotationSpeed: 0
 --- !u!1 &1524379543
 GameObject:
   m_ObjectHideFlags: 0
