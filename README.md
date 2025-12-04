@@ -14,4 +14,4 @@ You control a duck that is attempting to escape the shackles of being caged with
   Laura Wetherhold - 3D animation and 3D painting of characters in a cute, semi-realistic style
   
 
-Halfway Presentation Video Link: [Video]()
+Halfway Presentation Video Link: [Video](https://drive.google.com/file/d/1Q9DrHFNlElkXx1fYWmUR-iCeNuM6itIQ/view?usp=sharing)
