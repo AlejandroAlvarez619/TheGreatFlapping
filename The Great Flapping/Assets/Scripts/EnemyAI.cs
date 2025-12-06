@@ -9,6 +9,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
+    public Animator animator;
 
     // Patrolling
     public Vector3 walkPoint;
@@ -26,10 +27,14 @@ public class NewBehaviourScript : MonoBehaviour
     public bool playerInSightRange;
     public bool playerInAttackRange;
 
+    public float patrolRunSpeed = 0.5f;
+    public float chaseRunSpeed = 1.5f;
+
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        // animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -43,24 +48,31 @@ public class NewBehaviourScript : MonoBehaviour
         if (playerInAttackRange && playerInSightRange) Attack();
     }
 
-private void Patrol()
-{
-    if (!walkPointSet) SearchForWalkPoint();
-
-    if (walkPointSet)
+    private void Patrol()
     {
-        Debug.Log("Moving to walkPoint: " + walkPoint);
-        agent.SetDestination(walkPoint);
+        agent.speed = patrolRunSpeed;
+
+        if (!walkPointSet) SearchForWalkPoint();
+
+        if (walkPointSet)
+        {
+            Debug.Log("Moving to walkPoint: " + walkPoint);
+            agent.SetDestination(walkPoint);
+        }
+
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+
+        animator.SetFloat("RunSpeed", patrolRunSpeed);
     }
-
-    Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-    if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
-}
 
     private void Chase()
     {
+        agent.speed = chaseRunSpeed;
         agent.SetDestination(player.position);
+
+        animator.SetFloat("RunSpeed", chaseRunSpeed);
     }
 
     private void Attack()
@@ -73,7 +85,7 @@ private void Patrol()
         if(!alreadyAttacked)
         {
             // Add Attack Code
-
+            // animator.SetTrigger("Attack"); //TEMP
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
