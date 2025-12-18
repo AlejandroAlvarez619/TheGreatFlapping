@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2232539406690575206, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3583945536304446835, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: m_LocalScale.x
       value: 100
@@ -250,11 +254,11 @@ PrefabInstance:
       objectReference: {fileID: 212504268}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: sightRange
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: attackRange
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: chaseRunSpeed
@@ -262,7 +266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: patrolRunSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: walkPointRange
@@ -274,7 +278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: timeBetweenAttacks
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5294294617839535685, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       propertyPath: playerInAttackRange
@@ -326,6 +330,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1793583874547924781, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 723428031}
     - targetCorrespondingSourceObject: {fileID: 5356519009175672971, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 212504268}
@@ -2426,6 +2433,32 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 403200725}
   m_SourcePrefab: {fileID: 100100000, guid: 37b42748ab3b766489122531005bd9c3, type: 3}
+--- !u!1 &723428027 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1793583874547924781, guid: 08c05a1d5c4001347a608f1222deeaf5, type: 3}
+  m_PrefabInstance: {fileID: 232325377}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &723428031
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723428027}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.740873, z: 1}
+  m_Center: {x: 0, y: 1.8634444, z: 0}
 --- !u!1 &742242969
 GameObject:
   m_ObjectHideFlags: 0

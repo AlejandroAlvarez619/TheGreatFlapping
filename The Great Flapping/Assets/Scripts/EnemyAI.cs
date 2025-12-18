@@ -34,19 +34,21 @@ public class NewBehaviourScript : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        // animator = GetComponent<Animator>();
+        agent.stoppingDistance = attackRange * 0.5f;
     }
 
     private void Update()
     {
-        // Check for sight and attack range
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        playerInSightRange = distanceToPlayer <= sightRange;
+        playerInAttackRange = distanceToPlayer <= attackRange;
 
         if (!playerInSightRange && !playerInAttackRange) Patrol();
-        if (playerInSightRange && !playerInAttackRange) Chase();
-        if (playerInAttackRange && playerInSightRange) Attack();
+        else if (playerInSightRange && !playerInAttackRange) Chase();
+        else if (playerInAttackRange && playerInSightRange) Attack();
     }
+
 
     private void Patrol()
     {
@@ -85,7 +87,11 @@ public class NewBehaviourScript : MonoBehaviour
         if(!alreadyAttacked)
         {
             // Add Attack Code
-            // animator.SetTrigger("Attack"); //TEMP
+            // animator.SetTrigger("Attack");
+            if (Vector3.Distance(transform.position, player.position) <= attackRange)
+            {
+                Destroy(player.gameObject);
+            }
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -106,4 +112,5 @@ public class NewBehaviourScript : MonoBehaviour
     {
         alreadyAttacked = false;
     }
+
 }
