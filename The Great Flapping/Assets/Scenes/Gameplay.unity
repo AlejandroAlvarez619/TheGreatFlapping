@@ -508,7 +508,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 70
+  field of view: 55
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4307,7 +4307,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 70
+    FieldOfView: 55
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -4510,13 +4510,16 @@ MonoBehaviour:
   airSpeedMultiplier: 0.55
   extraFallGravity: 3
   maxFallSpeed: 35
+  animator: {fileID: 983203688}
   jumpForce: 8
   jumpWindowSeconds: 1
   jumpsPerWindow: 2
+  turnSpeed: 12
+  model: {fileID: 0}
+  modelYawOffset: 0
   jumpKey: 32
   sprintKey: 304
   orientation: {fileID: 1752546961}
-  animator: {fileID: 983203688}
 --- !u!65 &1524379547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4845,7 +4848,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1664276762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5241,15 +5244,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5489829808598487473, guid: 1b3904c27daf8ec40998027dcc750477, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.12
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5489829808598487473, guid: 1b3904c27daf8ec40998027dcc750477, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.12
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5489829808598487473, guid: 1b3904c27daf8ec40998027dcc750477, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.12
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5489829808598487473, guid: 1b3904c27daf8ec40998027dcc750477, type: 3}
       propertyPath: m_LocalPosition.x

@@ -10,12 +10,18 @@ public class PlayerMovement : MonoBehaviour
     public float airDrag = 0.5f;
 
     public float airSpeedMultiplier = 0.55f;
-    public float extraFallGravity = 25f;
+    public float extraFallGravity = 3f;
     public float maxFallSpeed = 35f;
-
+    public Animator animator;
     public float jumpForce = 6f;
     public float jumpWindowSeconds = 1f;
     public int jumpsPerWindow = 2;
+    
+    [Header("Rotation")]
+    public float turnSpeed = 12f;
+    public Transform model;          
+    public float modelYawOffset = 0; 
+
 
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
@@ -28,8 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     float currentMoveSpeed;
-
-    public Animator animator;
 
     int jumpsUsed;
     float windowTimer;
@@ -60,11 +64,9 @@ public class PlayerMovement : MonoBehaviour
         float baseSpeed = Input.GetKey(sprintKey) ? sprintSpeed : moveSpeed;
 
         bool inAir = rb.linearVelocity.y > 0.1f || rb.linearVelocity.y < -0.1f;
-
+        UpdateAnimator();
         currentMoveSpeed = inAir ? baseSpeed * airSpeedMultiplier : baseSpeed;
         rb.linearDamping = inAir ? airDrag : groundDrag;
-
-        UpdateAnimator();
 
         if (Input.GetKeyDown(jumpKey) && jumpsUsed < jumpsPerWindow)
         {
@@ -72,18 +74,17 @@ public class PlayerMovement : MonoBehaviour
             jumpsUsed++;
         }
 
-        if (rb.linearVelocity.y < 0f)
-            rb.AddForce(Vector3.down * extraFallGravity, ForceMode.Acceleration);
-
-        if (rb.linearVelocity.y < -maxFallSpeed)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -maxFallSpeed, rb.linearVelocity.z);
+        
     }
 
-    void FixedUpdate()
-    {
-        MovePlayer();
-        SpeedLimiter();
-    }
+   void FixedUpdate()
+{
+    MovePlayer();
+    RotatePlayer();
+    SpeedLimiter();
+    
+}
+
 
     void MovePlayer()
     {
@@ -92,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(moveDirection.normalized * currentMoveSpeed * moveForce, ForceMode.Force);
     }
-
+    
     void SpeedLimiter()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
@@ -110,28 +111,42 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-    private void UpdateAnimator()
+
+    void RotatePlayer()
+{
+    Vector3 lookDir = new Vector3(moveDirection.x, 0f, moveDirection.z);
+    if (lookDir.sqrMagnitude < 0.0001f) return;
+
+    Quaternion targetRot = Quaternion.LookRotation(lookDir, Vector3.up);
+    transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnSpeed * Time.fixedDeltaTime);
+
+    
+    if (model != null)
+        model.localRotation = Quaternion.Euler(0f, modelYawOffset, 0f);
+}
+
+private void UpdateAnimator()
+{
+    if (animator == null) return;
+
+    Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+    float rawSpeed = flatVel.magnitude;
+
+    float animSpeed = 0f;
+
+    if (rawSpeed < 0.1f)
     {
-        if (animator == null) return;
-
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        float rawSpeed = flatVel.magnitude;
-
-        float animSpeed = 0f;
-
-        if (rawSpeed < 0.1f)
-        {
-            animSpeed = 0f;
-        }
-        else if (Input.GetKey(sprintKey))
-        {
-            animSpeed = 3f;
-        }
-        else
-        {
-            animSpeed = 1f;
-        }
-
-        animator.SetFloat("Speed", animSpeed);
+        animSpeed = 0f;
     }
+    else if (Input.GetKey(sprintKey))
+    {
+        animSpeed = 3f;
+    }
+    else
+    {
+        animSpeed = 1f;
+    }
+
+    animator.SetFloat("Speed", animSpeed);
+}
 }
