@@ -1,131 +1,109 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
-    public float sprintSpeed;
-    public float groundDrag;
+    public float moveSpeed = 6f;
+    public float sprintSpeed = 10f;
+    public float moveForce = 10f;
 
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump;
+    public float groundDrag = 6f;
+    public float airDrag = 0.5f;
 
-    [Header("Keybinds")]
+    public float airSpeedMultiplier = 0.55f;
+    public float extraFallGravity = 25f;
+    public float maxFallSpeed = 35f;
+
+    public float jumpForce = 6f;
+    public float jumpWindowSeconds = 1f;
+    public int jumpsPerWindow = 2;
+
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
-
-    [Header("Ground Check")]
-    public float playerHeight;
-    public LayerMask whatIsGround;
-    bool grounded;
-
-    public float groundCheckRadius = 0.3f;
-    public float maxSlopeAngle = 60f;
-
-    [Header("Double Jump")]
-    public int maxJumps = 2;
-    int jumpsLeft;
 
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
+
     Rigidbody rb;
     float currentMoveSpeed;
 
-    private void Start()
+    int jumpsUsed;
+    float windowTimer;
+
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        readyToJump = true;
-        currentMoveSpeed = moveSpeed;
-        jumpsLeft = maxJumps;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        jumpsUsed = 0;
+        windowTimer = 0f;
     }
 
-    private void Update()
+    void Update()
     {
-        Ray downRay = new Ray(transform.position, Vector3.down);
-        float castDistance = playerHeight * 0.5f + 0.3f;
-
-        if (Physics.SphereCast(downRay, groundCheckRadius, out RaycastHit hit, castDistance, whatIsGround))
+        windowTimer += Time.deltaTime;
+        if (windowTimer >= jumpWindowSeconds)
         {
-            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
-            grounded = slopeAngle <= maxSlopeAngle;
+            windowTimer = 0f;
+            jumpsUsed = 0;
         }
-        else grounded = false;
 
-        if (grounded) jumpsLeft = maxJumps;
-
-        MyInput();
-        HandleSprint();
-        SpeedLimiter();
-
-        if (grounded && rb.linearVelocity.y < 0)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -2f, rb.linearVelocity.z);
-
-        rb.linearDamping = grounded ? groundDrag : 0f;
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-    private void MyInput()
-    {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKeyDown(jumpKey) && jumpsLeft > 0)
+        float baseSpeed = Input.GetKey(sprintKey) ? sprintSpeed : moveSpeed;
+
+        bool inAir = rb.linearVelocity.y > 0.1f || rb.linearVelocity.y < -0.1f;
+
+        currentMoveSpeed = inAir ? baseSpeed * airSpeedMultiplier : baseSpeed;
+        rb.linearDamping = inAir ? airDrag : groundDrag;
+
+        if (Input.GetKeyDown(jumpKey) && jumpsUsed < jumpsPerWindow)
         {
-            readyToJump = false;
             Jump();
-            jumpsLeft--;
-            Invoke(nameof(ResetJump), jumpCooldown);
+            jumpsUsed++;
         }
+
+        if (rb.linearVelocity.y < 0f)
+            rb.AddForce(Vector3.down * extraFallGravity, ForceMode.Acceleration);
+
+        if (rb.linearVelocity.y < -maxFallSpeed)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -maxFallSpeed, rb.linearVelocity.z);
     }
 
-    private void HandleSprint()
+    void FixedUpdate()
     {
-        if (Input.GetKey(sprintKey) && grounded)
-            currentMoveSpeed = sprintSpeed;
-        else
-            currentMoveSpeed = moveSpeed;
+        MovePlayer();
+        SpeedLimiter();
     }
 
-    private void MovePlayer()
+    void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (moveDirection.sqrMagnitude < 0.0001f) return;
 
-        if (grounded)
-            rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
-        else
-            rb.AddForce(moveDirection.normalized * currentMoveSpeed * 10f * airMultiplier, ForceMode.Force);
+        rb.AddForce(moveDirection.normalized * currentMoveSpeed * moveForce, ForceMode.Force);
     }
 
-    private void SpeedLimiter()
+    void SpeedLimiter()
     {
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float maxSpeed = currentMoveSpeed;
 
-        if (flatVel.magnitude > currentMoveSpeed)
+        if (flatVel.magnitude > maxSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * currentMoveSpeed;
+            Vector3 limitedVel = flatVel.normalized * maxSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
 
-    private void Jump()
+    void Jump()
     {
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }
-
-    private void ResetJump()
-    {
-        readyToJump = true;
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 }
