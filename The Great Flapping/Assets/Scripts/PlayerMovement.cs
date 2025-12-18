@@ -23,12 +23,19 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
 
+    public float groundCheckRadius = 0.3f;
+    public float maxSlopeAngle = 60f;
+
+    [Header("Double Jump")]
+    public int maxJumps = 2;
+    int jumpsLeft;
+
     public Transform orientation;
+
     float horizontalInput;
     float verticalInput;
     Vector3 moveDirection;
     Rigidbody rb;
-
     float currentMoveSpeed;
 
     private void Start()
@@ -37,20 +44,29 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         readyToJump = true;
         currentMoveSpeed = moveSpeed;
+        jumpsLeft = maxJumps;
     }
 
     private void Update()
     {
-        grounded = Physics.Raycast(
-            transform.position,
-            Vector3.down,
-            playerHeight * 0.5f + 0.2f,
-            whatIsGround
-        );
+        Ray downRay = new Ray(transform.position, Vector3.down);
+        float castDistance = playerHeight * 0.5f + 0.3f;
+
+        if (Physics.SphereCast(downRay, groundCheckRadius, out RaycastHit hit, castDistance, whatIsGround))
+        {
+            float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+            grounded = slopeAngle <= maxSlopeAngle;
+        }
+        else grounded = false;
+
+        if (grounded) jumpsLeft = maxJumps;
 
         MyInput();
         HandleSprint();
         SpeedLimiter();
+
+        if (grounded && rb.linearVelocity.y < 0)
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -2f, rb.linearVelocity.z);
 
         rb.linearDamping = grounded ? groundDrag : 0f;
     }
@@ -59,16 +75,16 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
     }
-
     private void MyInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && jumpsLeft > 0)
         {
             readyToJump = false;
             Jump();
+            jumpsLeft--;
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
