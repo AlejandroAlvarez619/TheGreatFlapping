@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -91,6 +92,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (Vector3.Distance(transform.position, player.position) <= attackRange)
             {
                 Destroy(player.gameObject);
+                SceneManager.LoadScene("GameOver");
             }
 
             alreadyAttacked = true;
