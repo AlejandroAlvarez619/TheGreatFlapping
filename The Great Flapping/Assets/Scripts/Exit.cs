@@ -15,5 +15,7 @@ public class Exit : MonoBehaviour
 
         Debug.Log("Exit reached!");
         SceneManager.LoadScene("Win");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

@@ -3,6 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuBehavior: MonoBehaviour 
 {
+    public void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     public void Play()
     {
         SceneManager.LoadScene("Gameplay");
