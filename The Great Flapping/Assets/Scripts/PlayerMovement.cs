@@ -31,7 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
-    private void Start();
     int jumpsUsed;
     float windowTimer;
 
@@ -55,25 +54,6 @@ public class PlayerMovement : MonoBehaviour
             jumpsUsed = 0;
         }
 
-        if (grounded) jumpsLeft = maxJumps;
-
-        MyInput();
-        HandleSprint();
-        SpeedLimiter();
-        UpdateAnimator();
-
-        if (grounded && rb.linearVelocity.y < 0)
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -2f, rb.linearVelocity.z);
-
-        rb.linearDamping = grounded ? groundDrag : 0f;
-    }
-
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
-    private void MyInput()
-    {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -83,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         currentMoveSpeed = inAir ? baseSpeed * airSpeedMultiplier : baseSpeed;
         rb.linearDamping = inAir ? airDrag : groundDrag;
+
+        UpdateAnimator();
 
         if (Input.GetKeyDown(jumpKey) && jumpsUsed < jumpsPerWindow)
         {
@@ -128,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-
     private void UpdateAnimator()
     {
         if (animator == null) return;
