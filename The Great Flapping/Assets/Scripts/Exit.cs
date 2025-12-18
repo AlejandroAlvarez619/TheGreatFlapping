@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,12 +13,7 @@ public class Exit : MonoBehaviour
     {
         if (!other.CompareTag(playerTag)) return;
 
-        Debug.Log("Exit reached! Closing game...");
-
-        Application.Quit();
-
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#endif
+        Debug.Log("Exit reached!");
+        SceneManager.LoadScene("Win");
     }
 }
