@@ -38,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     float currentMoveSpeed;
 
+    public Animator animator;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -64,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         HandleSprint();
         SpeedLimiter();
+        UpdateAnimator();
 
         if (grounded && rb.linearVelocity.y < 0)
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, -2f, rb.linearVelocity.z);
@@ -127,5 +130,30 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+
+    private void UpdateAnimator()
+    {
+        if (animator == null) return;
+
+        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        float rawSpeed = flatVel.magnitude;
+
+        float animSpeed = 0f;
+
+        if (rawSpeed < 0.1f)
+        {
+            animSpeed = 0f;
+        }
+        else if (Input.GetKey(sprintKey))
+        {
+            animSpeed = 3f;
+        }
+        else
+        {
+            animSpeed = 1f;
+        }
+
+        animator.SetFloat("Speed", animSpeed);
     }
 }
